@@ -2,10 +2,20 @@
 
 ## Project Overview
 
-This is a single-file static web app: the entire site is bundled into one `index.html` (~3MB).
-The file contains a self-unpacking "bundler" that embeds all assets (fonts, images, JS) as
-base64 data in `<script type="__bundler/manifest">` / `__bundler/template` tags and reconstructs
-them as blob URLs at runtime via JavaScript on `DOMContentLoaded`.
+A static web app served by nginx. The site was previously a single ~3MB `index.html` with all
+assets (fonts, images, JS) embedded as base64. Assets have been extracted to `assets/` and the
+page template to `template.html`, leaving `index.html` as a small loader (~3KB).
+
+### File structure
+
+- `index.html` — slim loader: fetches `template.html` + `assets/resources.json`, injects the
+  resource map, parses the template, replaces the document, and re-executes scripts.
+- `template.html` — the full page HTML with UUID asset references replaced by `assets/<uuid>.<ext>`
+  paths. Contains the DCLogic component (`text/x-dc` script) with the translation object (prices,
+  text, etc.). **Edit this file for content/price changes** — changes appear on browser refresh.
+- `assets/` — extracted images (`.png`, `.jpg`, `.webp`), fonts (`.woff2`), JS (`.js`), and
+  `resources.json` (maps CDN URLs for React/ReactDOM to local asset paths).
+- `docker-compose.base44.yml` — mounts all three into nginx.
 
 ## How to run
 
@@ -13,16 +23,17 @@ them as blob URLs at runtime via JavaScript on `DOMContentLoaded`.
 docker compose -f docker-compose.base44.yml up -d
 ```
 
-Serves `index.html` via nginx on host port 3000. No build step, no dependencies to install.
+Serves on host port 3000. No build step, no dependencies to install.
 
 ## Known non-issues
 
-- `/_vercel/insights/script.js` returns 404 — this is a Vercel analytics script referenced in the
-  HTML head. It fails to load in this environment but does not affect page rendering (loaded with `defer`).
-- `.image-slots.state.json` returns 404 — the `<image-slot>` custom element tries to load persisted
-  image state; in a fresh environment there is none, so it 404s harmlessly.
+- `/_vercel/insights/script.js` returns 404 — Vercel analytics script, harmless (loaded with `defer`).
+- `.image-slots.state.json` returns 404 — `<image-slot>` custom element, no persisted state in fresh env.
 
 ## Editing
 
-Edit `index.html` directly. Changes are picked up on browser refresh (no live-reload server;
-call `reload_preview` after edits if needed).
+- **Content/prices/text**: edit `template.html` directly. The translation object inside the
+  `text/x-dc` script tag contains all text strings (including prices like `basicPrice: '₪520'`).
+  Changes are picked up on browser refresh — call `reload_preview` after edits.
+- **Images**: replace files in `assets/` with the same filename.
+- **Loader logic**: edit `index.html`.
