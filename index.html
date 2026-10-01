@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     // Fetch template and resource map in parallel
     const [templateRes, resourcesRes] = await Promise.all([
-      fetch('template.html'),
+      fetch('template.html?v=' + Date.now()),
       fetch('assets/resources.json').catch(function() { return null; })
     ]);
 

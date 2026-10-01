@@ -610,10 +610,10 @@
   * { box-sizing:border-box; font-family:'Heebo',sans-serif; }
   .heading { font-family:'Rubik',sans-serif; }
   input::placeholder { font-family:'Heebo',sans-serif; }
-  @media (min-width:641px) { #hero-outer { display:flex !important; flex-direction:row-reverse !important; align-items:stretch !important; height:560px !important; min-height:0 !important; } #hero-tent { width:calc(100% - 414px) !important; height:100% !important; margin-top:0 !important; order:0 !important; flex:0 0 auto !important; } #hero-overlay-gradient { display:none !important; } #hero-overlay-text { display:none !important; } #hero-side-panel { display:flex !important; width:414px !important; flex:0 0 414px !important; } #hero-logo-overlay { display:none !important; } #hero-mobile-strip { display:none !important; } [dir="ltr"] #hero-outer { flex-direction:row !important; } }
-  @media (max-width:640px) { #hero-side-panel { display:none !important; } #hero-overlay-gradient { display:none !important; } #hero-insta-mobile { display:flex !important; } #lang-dropdown-btn { color:#5a2233 !important; } #lang-dropdown-arrow path { stroke:#5a2233 !important; } .tabs-row-en { padding:0 20px !important; } #media-placeholder { flex-direction:column; } #prod-table { order:3; } #table-arrow { order:2; margin-top:8px; } #table-text { order:1; } #prod-table, #table-arrow, #table-text { width:100%; } .grid-table-row { margin-top:-24px; } #pinata-img { top:-1px !important; } #pinata-arrow { position:relative; right:-30px; transform:rotate(-30deg) scale(0.8); } #table-arrow { display:none !important; } #media-placeholder { height:auto !important; } #pinata-text { order:3; margin-top:8px; } #table-text-1 { order:1; } #prod-table { order:2 !important; } #table-text-2 { order:3; display:block !important; margin-top:12px; } #media-placeholder { position:relative; top:-42px; } #mobile-divider { display:block !important; margin-top:16px !important; } .concept-tab { padding:clamp(8.3px,2.1vw,12.6px) clamp(10.4px,3.1vw,25.1px) !important; font-size:clamp(11.6px,2.9vw,15.7px) !important; gap:clamp(4.6px,1.5vw,12px) !important; } }
+  @media (min-width:641px) { #hero-outer { display:flex !important; flex-direction:row-reverse !important; align-items:stretch !important; height:560px !important; min-height:0 !important; } #hero-tent { width:calc(100% - 414px) !important; height:100% !important; margin-top:0 !important; order:0 !important; flex:0 0 auto !important; } #hero-overlay-gradient { display:none !important; } #hero-overlay-text { display:none !important; } #hero-side-panel { display:flex !important; width:414px !important; flex:0 0 414px !important; } #hero-logo-overlay { display:none !important; } #hero-mobile-strip { display:none !important; } }
+  @media (max-width:640px) { #hero-side-panel { display:none !important; } #hero-overlay-gradient { display:none !important; } #hero-insta-mobile { display:flex !important; } #media-placeholder { flex-direction:column; } #prod-table { order:3; } #table-arrow { order:2; margin-top:8px; } #table-text { order:1; } #prod-table, #table-arrow, #table-text { width:100%; } .grid-table-row { margin-top:-24px; } #pinata-img { top:-1px !important; } #pinata-arrow { position:relative; right:-30px; transform:rotate(-30deg) scale(0.8); } #table-arrow { display:none !important; } #media-placeholder { height:auto !important; } #pinata-text { order:3; margin-top:8px; } #table-text-1 { order:1; } #prod-table { order:2 !important; } #table-text-2 { order:3; display:block !important; margin-top:12px; } #media-placeholder { position:relative; top:-42px; } #mobile-divider { display:block !important; margin-top:16px !important; } .concept-tab { padding:clamp(8.3px,2.1vw,12.6px) clamp(10.4px,3.1vw,25.1px) !important; font-size:clamp(11.6px,2.9vw,15.7px) !important; gap:clamp(4.6px,1.5vw,12px) !important; } }
   @media (max-width:640px) { #tent-detail-grid, #craft-detail-grid, #hunt-detail-grid { gap:16px !important; margin-top:20px !important; } }
-  @media (max-width:640px) { .tabs-row-en { overflow-x:auto !important; -webkit-overflow-scrolling:touch; scrollbar-width:none; } .tabs-row-en::-webkit-scrollbar { display:none; } }
+ 
   @media (min-width:641px) { #table-text-1 { position:relative; top:28px; } .box-card-img { height:260px !important; } .box-card-text { min-height:100px !important; display:flex !important; flex-direction:column !important; justify-content:center !important; } #prod-tent-setup { height:286px !important; } #prod-hunt-visual { height:284px !important; } }
 </style>
 <link rel="ext-resource-dependency" href="./assets/real-party-1.jpg">
@@ -644,18 +644,6 @@ setInterval(function () {
   <div style="max-width:1000px;margin:0 auto;padding:32px 24px 80px;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
     <button sc-camel-on-click="{{ goBackToBox }}" style="border:none;background:#fff;color:#5a2233;padding:8px 15px;border-radius:0;font-size:11px;font-weight:500;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.1);">{{ T.backBtn }}</button>
-    <div class="lang-dropdown-wrap" style="position:relative;">
-      <button sc-camel-on-click="{{ toggleLangMenu }}" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;box-shadow:none;padding:4px;font-size:14px;font-weight:500;color:#5a2233;cursor:pointer;">
-        {{ T.currentLangLabel }}
-        <svg width="10" height="6" sc-camel-view-box="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#5a2233" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </button>
-      <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(90,34,51,0.14);overflow:hidden;z-index:10;">
-          <button sc-camel-on-click="{{ setLangHe }}" style="display:block;width:100%;border:none;background:{{ heMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">עברית</button>
-          <button sc-camel-on-click="{{ setLangEn }}" style="display:block;width:100%;border:none;background:{{ enMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">English</button>
-        </div>
-      </sc-if>
-    </div>
     </div>
     <div id="hunt-detail-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;margin-top:40px;">
       <div style="position:relative;width:100%;height:420px;touch-action:pan-y;">
@@ -680,20 +668,6 @@ setInterval(function () {
   <div id="hero-outer" style="position:relative;width:100%;min-height:560px;height:560px;overflow:hidden;">
     <image-slot id="hero-tent" shape="rect" placeholder="{{ T.heroImgPlaceholder }}" fit="cover" src="assets/3d97ef21-d7e6-4afb-9902-e14f4c2626be.jpg" style="width:100%;height:calc(100% + 40px);margin-top:-40px;transform:scale(1.15);" class="box-card-img"></image-slot>
     <div id="hero-overlay-gradient" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(60,20,40,0.02) 0%, rgba(60,20,40,0.18) 35%, rgba(60,20,40,0.4) 65%, rgba(60,20,40,0.6) 100%); pointer-events: none;"></div>
-    <div style="position:absolute;top:28px;right:24px;z-index:5;">
-      <div class="lang-dropdown-wrap" style="position:relative;">
-        <button id="lang-dropdown-btn" sc-camel-on-click="{{ toggleLangMenu }}" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;box-shadow:none;padding:4px;font-size:14px;font-weight:500;color:#fff6ea;cursor:pointer;">
-          {{ T.currentLangLabel }}
-          <svg id="lang-dropdown-arrow" width="10" height="6" sc-camel-view-box="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#fff6ea" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-        </button>
-        <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-          <div style="position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(90,34,51,0.14);overflow:hidden;z-index:10;">
-            <button sc-camel-on-click="{{ setLangHe }}" style="display:block;width:100%;border:none;background:{{ heMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">עברית</button>
-            <button sc-camel-on-click="{{ setLangEn }}" style="display:block;width:100%;border:none;background:{{ enMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">English</button>
-          </div>
-        </sc-if>
-      </div>
-    </div>
     <a id="hero-insta-mobile" href="https://www.instagram.com/gili_and_bili/?hl=en" target="_blank" style="display:none;position:absolute;top:28px;left:24px;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1.5px solid #5a2233;color:#5a2233;z-index:5;">
       <svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
         <rect x="2" y="2" width="20" height="20" rx="6"></rect>
@@ -902,18 +876,6 @@ setInterval(function () {
   <div style="max-width:1000px;margin:0 auto;padding:32px 24px 80px;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
     <button sc-camel-on-click="{{ goBackToBox }}" style="border:none;background:#fff;color:#5a2233;padding:8px 15px;border-radius:0;font-size:11px;font-weight:500;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.1);">{{ T.backBtn }}</button>
-    <div class="lang-dropdown-wrap" style="position:relative;">
-      <button sc-camel-on-click="{{ toggleLangMenu }}" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;box-shadow:none;padding:4px;font-size:14px;font-weight:500;color:#5a2233;cursor:pointer;">
-        {{ T.currentLangLabel }}
-        <svg width="10" height="6" sc-camel-view-box="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#5a2233" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </button>
-      <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(90,34,51,0.14);overflow:hidden;z-index:10;">
-          <button sc-camel-on-click="{{ setLangHe }}" style="display:block;width:100%;border:none;background:{{ heMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">עברית</button>
-          <button sc-camel-on-click="{{ setLangEn }}" style="display:block;width:100%;border:none;background:{{ enMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">English</button>
-        </div>
-      </sc-if>
-    </div>
     </div>
     <div id="craft-detail-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;margin-top:40px;">
       <sc-if value="{{ isFairy }}" hint-placeholder-val="{{ true }}">
@@ -935,18 +897,6 @@ setInterval(function () {
   <div style="max-width:1000px;margin:0 auto;padding:32px 24px 80px;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
     <button sc-camel-on-click="{{ goBackToBox }}" style="border:none;background:#fff;color:#5a2233;padding:8px 15px;border-radius:0;font-size:11px;font-weight:500;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.1);">{{ T.backBtn }}</button>
-    <div class="lang-dropdown-wrap" style="position:relative;">
-      <button sc-camel-on-click="{{ toggleLangMenu }}" style="display:flex;align-items:center;gap:6px;border:none;background:transparent;box-shadow:none;padding:4px;font-size:14px;font-weight:500;color:#5a2233;cursor:pointer;">
-        {{ T.currentLangLabel }}
-        <svg width="10" height="6" sc-camel-view-box="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="#5a2233" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      </button>
-      <sc-if value="{{ langMenuOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="position:absolute;top:calc(100% + 4px);left:0;right:0;background:#fff;border-radius:10px;box-shadow:0 6px 20px rgba(90,34,51,0.14);overflow:hidden;z-index:10;">
-          <button sc-camel-on-click="{{ setLangHe }}" style="display:block;width:100%;border:none;background:{{ heMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">עברית</button>
-          <button sc-camel-on-click="{{ setLangEn }}" style="display:block;width:100%;border:none;background:{{ enMenuBg }};padding:9px 14px;font-size:14px;color:#5a2233;text-align:start;cursor:pointer;">English</button>
-        </div>
-      </sc-if>
-    </div>
     </div>
     <div id="tent-detail-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;margin-top:40px;">
       <image-slot id="prod-tent-setup-full" shape="rounded" radius="24" placeholder="{{ T.heroImgPlaceholder }}" src="assets/3d97ef21-d7e6-4afb-9902-e14f4c2626be.jpg" style="width: 100%; max-width: 435px; height: 375px;"></image-slot>
@@ -969,7 +919,7 @@ setInterval(function () {
 </x-dc>
 <script type="text/x-dc" data-dc-script="">
 class Component extends DCLogic {
-  state = { lang: (typeof navigator !== 'undefined' && (navigator.language || '').toLowerCase().startsWith('he')) ? 'he' : 'en', concept: 'fairy', huntOpen: false, craftOpen: false, tentOpen: false, partyIndex: 0 };
+  state = { concept: 'fairy', huntOpen: false, craftOpen: false, tentOpen: false, partyIndex: 0 };
   componentDidMount() {
     this._onPopState = () => {
       if (this._skipNextPop) { this._skipNextPop = false; return; }
@@ -981,21 +931,13 @@ class Component extends DCLogic {
     };
     window.addEventListener('popstate', this._onPopState);
     this._scrollToTopFix = () => setTimeout(() => window.scrollTo({ top: 0 }), 50);
-    this._onOutsideClick = (e) => {
-      if (!this.state.langMenuOpen) return;
-      if (!e.target.closest('.lang-dropdown-wrap')) this.setState({ langMenuOpen: false });
-    };
-    document.addEventListener('mousedown', this._onOutsideClick, true);
-    document.addEventListener('touchstart', this._onOutsideClick, true);
   }
   componentWillUnmount() {
     window.removeEventListener('popstate', this._onPopState);
-    document.removeEventListener('mousedown', this._onOutsideClick, true);
-    document.removeEventListener('touchstart', this._onOutsideClick, true);
   }
   renderVals() {
-    const L = this.state.lang;
-    const dir = L === 'he' ? 'rtl' : 'ltr';
+    const L = 'he';
+    const dir = 'rtl';
 
     const ui = {
       he: {
@@ -1024,33 +966,6 @@ class Component extends DCLogic {
         specDepthVal: '3 מטר', specWidthVal: '4 מטר', specHeightVal: '2 – 2.5 מטר', specSetupVal: 'כ-15 דקות', specSuitedVal: 'עד 20 ילדים יושבים',
         tentNote2: 'מומלץ להקמה בחצר, על דשא או משטח אדמה. \nמומלץ למזג נעים, פחות מתאים לרוח חזקה.',
         waPrefillMsg: 'היי! רוצה להזמין ערכת פיות יער ליום ההולדת - איך ממשיכים?'
-      },
-      en: {
-        heroStrip: 'Easy-setup styled tent | Personalized craft kits | Treasure hunt activity | Piñata',
-        sidebar1: 'Easy-setup styled tent', sidebar2: 'Personalized crafts', sidebar3: 'Treasure hunt', sidebar4: 'Piñata',
-        boxTitle: "What's in the kit", boxSub: 'Everything you need for a perfect forest fairies party',
-        heroImgPlaceholder: 'Colorful tent photo with pillows and balloons',
-        tentCardTitle: 'Tent + pillow covers', tentCardDesc: 'Quick and easy setup.',
-        tentCardDesc2: 'Quick and easy setup between two trees or poles.',
-        huntCardTitle: 'Treasure hunt', huntCardDesc: 'An illustrated clue trail with tasks and spots found in any garden.',
-        optionalBadge: 'Optional', pinataTitle: 'Piñata', pinataDesc: 'The highlight of the party!\n\nCan be added with advance notice.',
-        tipBadge: 'Tip', tableTip: 'Lower a table you already have', tableDesc: 'Place a legless folding table on 2 low boxes.',
-        tableDesc2: 'You can get boxes like these yourself, or add them to the kit for an extra fee.',
-        tablePlaceholder: '2 low boxes or a white folding table',
-        pricingTitle: 'Packages & pricing', basicPkgTitle: 'Basic kit', pinataPkgTitle: 'Kit with piñata',
-        pkgFeature1: 'Quick-setup tent + mat + pillow covers', pkgFeature2: '12 personalized craft kits',
-        pkgFeature3: 'Treasure hunt game', pkgFeature4: 'Piñata (by advance arrangement, subject to availability)',
-        ctaOrder: 'Details & booking', pkgNote: 'Extra craft kits for $6.50 each (~20 ILS).', basicPrice: '$170', basicPriceNote: '', pinataPrice: '$230', pinataPriceNote: '',
-        galleryTitle: 'Our party gallery',
-        formSub: "Leave your details and we'll get back to you with everything you need to know",
-        namePh: 'Full name', phonePh: 'Phone', datePh: 'Preferred date (e.g. mid-August)', notePh: 'Question, request or note (optional)',
-        submitBtn: 'Send', waText: 'Or message us on WhatsApp 050-3344142', igText: 'Follow us on Instagram',
-        footer: 'Gili & Bilili — Party in a Box · parties in a box delivered right to you',
-        backBtn: '← Back to home', craftNote: 'Each girl gets her kit ready in advance, including glue, decorations, etc.',
-        specDepth: 'Depth', specWidth: 'Width', specHeight: 'Height', specSetup: 'Setup time', specSuited: 'Suitable for',
-        specDepthVal: '3 meters', specWidthVal: '4 meters', specHeightVal: '2 – 2.5 meters', specSetupVal: '~15 minutes', specSuitedVal: 'Up to 20 kids seated',
-        tentNote2: 'Best set up in a yard, on grass or dirt ground. \nBest in mild weather, less suited to strong wind.',
-        waPrefillMsg: "Hi! I'd like to book a Forest Fairies kit for the birthday - how do we proceed?"
       }
     };
     const T = ui[L];
@@ -1063,12 +978,6 @@ class Component extends DCLogic {
           craftTitle: 'ערכות יצירה אישיות', craftDesc: 'תיק פטרייה לקישוט + מטה קסמים והמון מנצנצים.', craftImgId: 'prod-craft-fairy', craftPlaceholder: 'ארנק לבד פטרייה + מטה כוכב',
           huntTitle: 'חיפוש המטמון של פיות היער', huntDesc: 'הבנות יוצאות למסע רמזים מאויר, פוגשות את חברי היער ומגיעות לאוצר. את רק צריכה להחביא את הרמזים.\n(המקומות הם כאלה שניתן למצוא בכל גינה ומסיבה).'
         },
-        en: {
-          label: 'Fairies', comingSoon: false,
-          headline: 'Birthday kits\ncreated with love.', sub: '',
-          craftTitle: 'Personalized craft kits', craftDesc: 'A mushroom decorating pouch + magic wand and lots of glitter.', craftImgId: 'prod-craft-fairy', craftPlaceholder: 'Felt mushroom pouch + star wand',
-          huntTitle: "The Forest Fairies' treasure hunt", huntDesc: "The girls set off on an illustrated clue trail, meet the forest friends, and reach the treasure. You just need to hide the clues.\n(The hiding spots work in any garden or party venue)."
-        },
         chip: '#f6dfe8', chipText: '#a3346a'
       },
       princesses: {
@@ -1079,13 +988,6 @@ class Component extends DCLogic {
           craftTitle: 'כתר ושרביט נסיכה', craftDesc: 'כתר נוצץ, שרביט קסמים ומדבקות אבנים', craftImgId: 'prod-craft-princesses', craftPlaceholder: 'כתר ושרביט נסיכה',
           huntTitle: 'חיפוש אבן החן של הממלכה', huntDesc: 'הבנות יוצאות למסע רמזים מלכותי, פוגשות את חצרני הארמון ומגיעות לאבן החן'
         },
-        en: {
-          label: 'Princesses (Soon)', comingSoon: true,
-          headline: 'A royal tent that turns any birthday into a palace courtyard party',
-          sub: 'A complete princess party: tent, pillows, gemstone hunt and crafts — all arrives packed and ready in one box',
-          craftTitle: 'Princess crown & wand', craftDesc: 'A sparkly crown, magic wand and gem stickers', craftImgId: 'prod-craft-princesses', craftPlaceholder: 'Princess crown & wand',
-          huntTitle: "The kingdom's gemstone hunt", huntDesc: 'The girls set off on a royal clue trail, meet the palace courtiers and reach the gemstone'
-        },
         chip: '#f3f0f7', chipText: '#7a6a9c'
       },
       pirates: {
@@ -1095,13 +997,6 @@ class Component extends DCLogic {
           sub: 'מסיבת קייפופ מלאה: אוהל, כריות, חיפוש אוצר ויצירות — הכל מגיע ארוז ומוכן בקופסה אחת',
           craftTitle: 'כובע קפטן ומפת אוצר', craftDesc: 'כובע פיראט, טלאי עין ומפת אוצר לצביעה', craftImgId: 'prod-craft-pirates', craftPlaceholder: 'כובע פיראט + מפת אוצר',
           huntTitle: 'חיפוש האוצר של הקייפופ', huntDesc: 'הילדים יוצאים למסע פענוח מפה, פוגשים את חברי הצוות ומגיעים לאוצר הנוצץ'
-        },
-        en: {
-          label: 'K-Pop (Soon)', comingSoon: true,
-          headline: 'A captain tent that turns any birthday into a sea adventure',
-          sub: 'A complete party: tent, pillows, treasure hunt and crafts — all arrives packed and ready in one box',
-          craftTitle: 'Captain hat & treasure map', craftDesc: 'Pirate hat, eye patch, and a treasure map to color', craftImgId: 'prod-craft-pirates', craftPlaceholder: 'Pirate hat + treasure map',
-          huntTitle: 'The K-Pop treasure hunt', huntDesc: 'The kids set off on a map-decoding journey, meet the crew members, and reach the sparkling treasure'
         },
         chip: '#e2ecf3', chipText: '#3a6a9c'
       }
@@ -1123,21 +1018,13 @@ class Component extends DCLogic {
     const partyPhotos = ['./assets/real-party-4.jpg', './assets/real-party-1.jpg', './assets/real-party-2.jpg', './assets/real-party-3.jpg'];
     const partySlides = partyPhotos.map((src, i) => ({ src, active: i === this.state.partyIndex, dotBg: i === this.state.partyIndex ? '#c2447a' : '#f0ded5', goTo: () => this.setState({ partyIndex: i }) }));
     return {
-      T: { ...T, currentLangLabel: L === 'he' ? 'עברית' : 'English' }, dir,
-      panelOffset: L === 'he' ? '35px' : '-85px',
+      T, dir,
+      panelOffset: '35px',
       panelAlign: 'flex-end',
-      panelTextAlign: L === 'he' ? 'right' : 'left',
-      cardArrowFlip: L === 'he' ? 'none' : 'scaleX(-1)',
+      panelTextAlign: 'right',
+      cardArrowFlip: 'none',
       tabsRowPadding: '0',
-      tabsRowClass: L === 'he' ? '' : 'tabs-row-en',
-
-      langMenuOpen: !!this.state.langMenuOpen,
-      toggleLangMenu: () => this.setState(s => ({ langMenuOpen: !s.langMenuOpen })),
-      closeLangMenu: () => this.setState({ langMenuOpen: false }),
-      setLangHe: () => this.setState({ lang: 'he', langMenuOpen: false }),
-      setLangEn: () => this.setState({ lang: 'en', langMenuOpen: false }),
-      heMenuBg: L === 'he' ? '#f6eef3' : '#fff',
-      enMenuBg: L === 'en' ? '#f6eef3' : '#fff',
+      tabsRowClass: '',
       partySlides,
       partyDisplay0: this.state.partyIndex === 0 ? 'block' : 'none',
       partyDisplay1: this.state.partyIndex === 1 ? 'block' : 'none',
@@ -1161,10 +1048,8 @@ class Component extends DCLogic {
         const phone = document.getElementById('lead-phone')?.value || '';
         const date = document.getElementById('lead-date')?.value || '';
         const note = document.getElementById('lead-note')?.value || '';
-        const cleanLabel = concept.label.replace(' (בקרוב)', '').replace(' (Soon)', '');
-        const text = L === 'he'
-          ? `היי, אני מעוניינת בהצעת מחיר למסיבת ${cleanLabel}\nשם: ${name}\nטלפון: ${phone}\nתאריך מבוקש: ${date}${note ? `\nהערה: ${note}` : ''}`
-          : `Hi, I'm interested in a quote for a ${cleanLabel} party\nName: ${name}\nPhone: ${phone}\nPreferred date: ${date}${note ? `\nNote: ${note}` : ''}`;
+        const cleanLabel = concept.label.replace(' (בקרוב)', '');
+        const text = `היי, אני מעוניינת בהצעת מחיר למסיבת ${cleanLabel}\nשם: ${name}\nטלפון: ${phone}\nתאריך מבוקש: ${date}${note ? `\nהערה: ${note}` : ''}`;
         window.location.href = `https://wa.me/972503344142?text=${encodeURIComponent(text)}`;
       },
       goBackToBox: () => {
