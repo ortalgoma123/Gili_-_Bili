@@ -802,7 +802,7 @@ setInterval(function () {
           <div style="display:flex;align-items:center;gap:8px;color:#5a2233;font-size:15px;font-weight:400;">{{ T.pkgFeature2 }}</div>
           <div style="display:flex;align-items:center;gap:8px;color:#5a2233;font-size:15px;font-weight:400;">{{ T.pkgFeature3 }}</div>
         </div>
-        <a href="#lead-form" style="display: inline-block; margin-top: 32px; color: #fff6ea; text-decoration: none; padding: 11px 28px; border-radius: 0; font-size: 12.6px; font-weight: 500; background-color: #EA9696">{{ T.ctaOrder }}</a>
+        <a href="#lead-form" sc-camel-on-click="{{ scrollToForm }}" style="display: inline-block; margin-top: 32px; color: #fff6ea; text-decoration: none; padding: 11px 28px; border-radius: 0; font-size: 12.6px; font-weight: 500; background-color: #EA9696">{{ T.ctaOrder }}</a>
         <div style="margin-top:20px;font-size:13px;color:#9a7d84;line-height:1.5;">{{ T.pkgNote }}</div>
       </div>
       <div style="background: linear-gradient(135deg,#fdf3ee,#f9e2ec); border-radius: 16px; padding: 48px 32px;">
@@ -817,7 +817,7 @@ setInterval(function () {
           <div style="display:flex;align-items:center;gap:8px;color:#5a2233;font-size:15px;font-weight:400;">{{ T.pkgFeature3 }}</div>
           <div style="display:flex;align-items:center;gap:8px;color:#5a2233;font-size:15px;font-weight:400;">{{ T.pkgFeature4 }}</div>
         </div>
-        <a href="#lead-form" style="display: inline-block; margin-top: 32px; color: #fff6ea; text-decoration: none; padding: 11px 28px; border-radius: 0; font-size: 12.6px; font-weight: 500; background-color: #EA9696">{{ T.ctaOrder }}</a>
+        <a href="#lead-form" sc-camel-on-click="{{ scrollToForm }}" style="display: inline-block; margin-top: 32px; color: #fff6ea; text-decoration: none; padding: 11px 28px; border-radius: 0; font-size: 12.6px; font-weight: 500; background-color: #EA9696">{{ T.ctaOrder }}</a>
         <div style="margin-top:20px;font-size:13px;color:#9a7d84;line-height:1.5;">{{ T.pkgNote }}</div>
       </div>
     </div>
@@ -1043,6 +1043,7 @@ class Component extends DCLogic {
       toggleHunt: () => { const opening = !this.state.huntOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ huntOpen: opening, craftOpen: false, tentOpen: false }); if (opening) window.history.pushState({ section: 'hunt' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
       toggleCraft: () => { const opening = !this.state.craftOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ craftOpen: opening, huntOpen: false, tentOpen: false }); if (opening) window.history.pushState({ section: 'craft' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
       toggleTent: () => { const opening = !this.state.tentOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ tentOpen: opening, huntOpen: false, craftOpen: false }); if (opening) window.history.pushState({ section: 'tent' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
+      scrollToForm: () => { const el = document.getElementById('lead-form'); if (el) el.scrollIntoView({ behavior: 'smooth' }); },
       submitLead: () => {
         const name = document.getElementById('lead-name')?.value || '';
         const phone = document.getElementById('lead-phone')?.value || '';
