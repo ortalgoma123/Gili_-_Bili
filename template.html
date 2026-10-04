@@ -631,7 +631,12 @@ setInterval(function () {
     var img = el.shadowRoot.querySelector('.frame img');
     if (img) img.style.touchAction = 'pan-y';
   }
-}, 100);
+  var vids = document.getElementsByTagName('video');
+  for (var j = 0; j < vids.length; j++) {
+    var v = vids[j];
+    if (v.style.display === 'block' && v.paused) v.play().catch(function(){});
+  }
+}, 300);
 </script>
 </helmet>
 
@@ -899,7 +904,18 @@ setInterval(function () {
     <button sc-camel-on-click="{{ goBackToBox }}" style="border:none;background:#fff;color:#5a2233;padding:8px 15px;border-radius:0;font-size:11px;font-weight:500;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.1);">{{ T.backBtn }}</button>
     </div>
     <div id="tent-detail-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;margin-top:40px;">
-      <image-slot id="prod-tent-setup-full" shape="rounded" radius="24" placeholder="{{ T.heroImgPlaceholder }}" src="assets/3d97ef21-d7e6-4afb-9902-e14f4c2626be.jpg" style="width: 100%; max-width: 435px; height: 375px;"></image-slot>
+      <div style="position:relative;width:100%;max-width:435px;height:375px;">
+        <div style="position:absolute;inset:0;border-radius:24px;overflow:hidden;box-shadow:0 4px 20px rgba(90,34,51,0.1);">
+          <image-slot id="prod-tent-setup-full" shape="rounded" radius="24" placeholder="{{ T.heroImgPlaceholder }}" src="assets/3d97ef21-d7e6-4afb-9902-e14f4c2626be.jpg" style="display:{{ tentGalleryDisplay0 }};width:100%;height:100%;"></image-slot>
+          <video src="assets/tent-video.mp4" autoplay muted loop playsinline preload="auto" style="display:{{ tentGalleryDisplay1 }};width:100%;height:100%;object-fit:cover;"></video>
+        </div>
+        <button sc-camel-on-click="{{ tentGalleryPrev }}" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:2;border:none;background:rgba(255,255,255,0.9);color:#5a2233;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.12);display:flex;align-items:center;justify-content:center;">→</button>
+        <button sc-camel-on-click="{{ tentGalleryNext }}" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:2;border:none;background:rgba(255,255,255,0.9);color:#5a2233;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.12);display:flex;align-items:center;justify-content:center;">←</button>
+        <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2;">
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ tentGalleryDotBg0 }};transition:background 0.2s;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ tentGalleryDotBg1 }};transition:background 0.2s;"></div>
+        </div>
+      </div>
       <div style="width: 100%; max-width: 438px;">
         <div class="heading" style="font-size: 24px; font-weight: 500; color: #5a2233; height: 19px">{{ T.tentCardTitle }}</div>
         <p style="font-size: 14px; color: #9a7d84; margin-top: 16px; line-height: 1.8; height: 10px">{{ T.tentCardDesc2 }}</p>
@@ -919,7 +935,7 @@ setInterval(function () {
 </x-dc>
 <script type="text/x-dc" data-dc-script="">
 class Component extends DCLogic {
-  state = { concept: 'fairy', huntOpen: false, craftOpen: false, tentOpen: false, partyIndex: 0 };
+  state = { concept: 'fairy', huntOpen: false, craftOpen: false, tentOpen: false, partyIndex: 0, tentGalleryIndex: 0 };
   componentDidMount() {
     this._onPopState = () => {
       if (this._skipNextPop) { this._skipNextPop = false; return; }
@@ -1032,6 +1048,12 @@ class Component extends DCLogic {
       partyDisplay3: this.state.partyIndex === 3 ? 'block' : 'none',
       partyPrev: () => this.setState(s => ({ partyIndex: (s.partyIndex - 1 + partyPhotos.length) % partyPhotos.length })),
       partyNext: () => this.setState(s => ({ partyIndex: (s.partyIndex + 1) % partyPhotos.length })),
+      tentGalleryDisplay0: this.state.tentGalleryIndex === 0 ? 'block' : 'none',
+      tentGalleryDisplay1: this.state.tentGalleryIndex === 1 ? 'block' : 'none',
+      tentGalleryDotBg0: this.state.tentGalleryIndex === 0 ? '#c2447a' : '#f0ded5',
+      tentGalleryDotBg1: this.state.tentGalleryIndex === 1 ? '#c2447a' : '#f0ded5',
+      tentGalleryPrev: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex - 1 + 2) % 2 })),
+      tentGalleryNext: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex + 1) % 2 })),
       concept, concepts,
       waPrefill: encodeURIComponent(T.waPrefillMsg),
       isFairy: this.state.concept === 'fairy',
@@ -1042,7 +1064,7 @@ class Component extends DCLogic {
       isTent: this.state.tentOpen,
       toggleHunt: () => { const opening = !this.state.huntOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ huntOpen: opening, craftOpen: false, tentOpen: false }); if (opening) window.history.pushState({ section: 'hunt' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
       toggleCraft: () => { const opening = !this.state.craftOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ craftOpen: opening, huntOpen: false, tentOpen: false }); if (opening) window.history.pushState({ section: 'craft' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
-      toggleTent: () => { const opening = !this.state.tentOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ tentOpen: opening, huntOpen: false, craftOpen: false }); if (opening) window.history.pushState({ section: 'tent' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
+      toggleTent: () => { const opening = !this.state.tentOpen; if (document.activeElement) document.activeElement.blur(); this.setState({ tentOpen: opening, huntOpen: false, craftOpen: false, tentGalleryIndex: 0 }); if (opening) window.history.pushState({ section: 'tent' }, ''); requestAnimationFrame(() => requestAnimationFrame(() => window.scrollTo({ top: 0 }))); this._scrollToTopFix(); },
       scrollToForm: () => { const el = document.getElementById('lead-form'); if (el) el.scrollIntoView({ behavior: 'smooth' }); },
       submitLead: () => {
         const name = document.getElementById('lead-name')?.value || '';
