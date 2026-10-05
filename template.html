@@ -908,12 +908,14 @@ setInterval(function () {
         <div style="position:absolute;inset:0;border-radius:24px;overflow:hidden;box-shadow:0 4px 20px rgba(90,34,51,0.1);">
           <image-slot id="prod-tent-setup-full" shape="rounded" radius="24" placeholder="{{ T.heroImgPlaceholder }}" src="assets/3d97ef21-d7e6-4afb-9902-e14f4c2626be.jpg" style="display:{{ tentGalleryDisplay0 }};width:100%;height:100%;"></image-slot>
           <video src="assets/tent-video.mp4" autoplay muted loop playsinline preload="auto" style="display:{{ tentGalleryDisplay1 }};width:100%;height:100%;object-fit:cover;"></video>
+          <video src="assets/tent-video-2.mp4" autoplay muted loop playsinline preload="auto" style="display:{{ tentGalleryDisplay2 }};width:100%;height:100%;object-fit:cover;"></video>
         </div>
         <button sc-camel-on-click="{{ tentGalleryPrev }}" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:2;border:none;background:rgba(255,255,255,0.9);color:#5a2233;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.12);display:flex;align-items:center;justify-content:center;">→</button>
         <button sc-camel-on-click="{{ tentGalleryNext }}" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:2;border:none;background:rgba(255,255,255,0.9);color:#5a2233;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(90,34,51,0.12);display:flex;align-items:center;justify-content:center;">←</button>
         <div style="position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2;">
           <div style="width:8px;height:8px;border-radius:50%;background:{{ tentGalleryDotBg0 }};transition:background 0.2s;"></div>
           <div style="width:8px;height:8px;border-radius:50%;background:{{ tentGalleryDotBg1 }};transition:background 0.2s;"></div>
+          <div style="width:8px;height:8px;border-radius:50%;background:{{ tentGalleryDotBg2 }};transition:background 0.2s;"></div>
         </div>
       </div>
       <div style="width: 100%; max-width: 438px;">
@@ -1050,10 +1052,12 @@ class Component extends DCLogic {
       partyNext: () => this.setState(s => ({ partyIndex: (s.partyIndex + 1) % partyPhotos.length })),
       tentGalleryDisplay0: this.state.tentGalleryIndex === 0 ? 'block' : 'none',
       tentGalleryDisplay1: this.state.tentGalleryIndex === 1 ? 'block' : 'none',
+      tentGalleryDisplay2: this.state.tentGalleryIndex === 2 ? 'block' : 'none',
       tentGalleryDotBg0: this.state.tentGalleryIndex === 0 ? '#c2447a' : '#f0ded5',
       tentGalleryDotBg1: this.state.tentGalleryIndex === 1 ? '#c2447a' : '#f0ded5',
-      tentGalleryPrev: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex - 1 + 2) % 2 })),
-      tentGalleryNext: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex + 1) % 2 })),
+      tentGalleryDotBg2: this.state.tentGalleryIndex === 2 ? '#c2447a' : '#f0ded5',
+      tentGalleryPrev: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex - 1 + 3) % 3 })),
+      tentGalleryNext: () => this.setState(s => ({ tentGalleryIndex: (s.tentGalleryIndex + 1) % 3 })),
       concept, concepts,
       waPrefill: encodeURIComponent(T.waPrefillMsg),
       isFairy: this.state.concept === 'fairy',
